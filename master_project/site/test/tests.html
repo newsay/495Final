@@ -1,0 +1,98 @@
+<!-- 
+@author Andrew Ritchie
+This file is used for running tests created in test/tests.
+Instructions for usage in Cloud9
+
+First Time Setup
+* Copy entire folder structure (all of andrew_ritchie) to your own folder
+* Create a new Run Configuration (Run -> Run Configuration -> New Run Configuration)
+* Click "Stop" if it shows on the left side of the new panel
+* In the first text box, put in your name without spaces, i.e. "andrew"
+* Click "Runner: Auto" and select "PHP (built-in web server)"
+* Click "CWD" and choose your folder
+
+After Setup
+* Click Run -> Run Configurations -> your name
+* In the new panel, make sure the application is running.
+* Click Preview -> Preview Running Application
+* Navigate to /test/tests.html
+* Once done testing, make sure to click "Stop" so other people can test.
+
+-->
+<html>
+
+<head>
+    <title>Tests</title>
+    <style>
+        table,th,td {
+            border: 1px solid black;
+        }
+        .failure {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test Summary</h1>
+    <table id="testSummary">
+        <tr>
+            <th>Test Name</th>
+            <th>Test Status</th>
+            <th>Test Summary</th>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        function runTest(testName, testFile) {
+            const http = new XMLHttpRequest();
+            http.open("GET", testFile);
+            http.send();
+            let testStatus = document.getElementById(testName + "Status");
+            let resultsSection = document.getElementById("results")
+            testStatus.innerHTML = "Running...";
+            http.onreadystatechange=(e)=> {
+                if (http.readyState == 4) {
+                    var obj = JSON.parse(http.responseText.replace(/\\/g,'/'));
+                    testStatus.innerHTML = obj.success ? "Pass" : "Fail";
+                    if (!obj.success) {
+                        testStatus.setAttribute("class","failure");
+                    }
+                    let testSummary = document.getElementById(testName + "Summary");
+                    testSummary.innerHTML = obj.summary;
+                    let node = document.createElement("div");
+                    node.setAttribute("id",testName);
+                    node.innerHTML = "<h2>" + testName + "</h2>" + obj.result;
+                    resultsSection.appendChild(node);
+                }
+            }
+        }
+        function registerTest(testName, testFile) {
+            let testSummary = document.getElementById("testSummary");
+            let node = document.createElement("tr")
+            node.innerHTML = "<td><a href='#" + testName + "'>" + testName + "</a></td>" + 
+                    "<td id='" + testName + "Status'><a href='#' onclick=\"runTest('" + testName + "', '" + testFile + "')\">Not Run (Run Test)</a></td>" + 
+                    "<td id='" + testName + "Summary'></td>"
+            testSummary.appendChild(node);
+        }
+        //registerTest("FailingTests", "tests\/test_tester.php");
+        
+        //TODO: Register new test fixtures
+        registerTest("SQLConnection", ".\/tests\/test_connection.php");
+        registerTest("Session", ".\/tests\/test_session.php");
+        registerTest("Users", ".\/tests\/test_users.php");
+        registerTest("Authentication", ".\/tests\/test_authentication.php");
+        registerTest("Organization", ".\/tests\/test_organization.php");
+        registerTest("Shift", ".\/tests\/test_shifts.php");
+        registerTest("Request", ".\/tests\/test_requests.php");
+        registerTest("Audit", ".\/tests\/test_audit.php");
+        
+    </script>
+    <p>
+        <h1>Results</h1>
+    </p>
+    <div id="results">
+        
+    </div>
+</body>
+
+</html>

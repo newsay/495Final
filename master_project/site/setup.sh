@@ -1,0 +1,8 @@
+mysqlpath="..\..\mysql\bin\mysql"
+user="aritchie"
+password="pFfcm4hUC8kNabxR"
+host="csc495.cmmdzy4o0hbl.us-east-2.rds.amazonaws.com"
+mysql -u $user --password=$password -h $host  < "./database/create_db.sql"
+mysql -u $user --password=$password -h $host db < "./database/create_tables.sql"
+mysql -u $user --password=$password -h $host testdb < "./database/create_tables.sql"
+#mysql -u $user --password=$password -h $host testdb < "./database/insert_records.sql"

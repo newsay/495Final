@@ -1,0 +1,56 @@
+body {
+  background-color: #ffffff;
+}
+.navbar-custom {
+  background-color: #00004d;
+  background-image: none;
+  background-repeat: no-repeat;
+  border-color: #00004d;
+  color: orange;
+}
+.nav.navbar-nav li a {
+  color: orange;
+}
+.nav.navbar-nav.navbar-right li a {
+  color: orange;
+}
+.navbar-inverse .navbar-brand {
+  color: orange;
+  font-size: 30px;
+}
+
+.login-header {
+  margin-top: 35%;
+}
+
+.footer-background-image1 {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  max-width: 500px;
+  z-index: -2;
+}
+
+.header-background-image1 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  max-width: 500px;
+}
+
+.refresh-button {
+  margin-left: 25px;
+}
+
+.error-message {
+  color: red;
+}
+.error-message-text {
+  color: red;
+  font-style: italic;
+}
+
+.paragraphspacing {
+  line-height: 1.6;
+}
