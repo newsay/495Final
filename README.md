@@ -1,5 +1,5 @@
 # Scheduling OnDemand
-Capstone Final Project for SDEV495, University of Maryland 2019
+Capstone Project for SDEV495, University of Maryland 2019
 
 # Description
 Scheduling OnDemand is a scheduling web application that allows users to view and self-assign to shifts that are currently available to be covered. Management can create, modify, and delete shifts as business demand increases or decreases to maximize business profit by ensuring all fillable schedules are covered.
